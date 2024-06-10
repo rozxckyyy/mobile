@@ -13,7 +13,9 @@ const App = () => {
     try {
       setLoading(true)
       const response = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?ingr=${searchQuery}&app_id=35f1bd2d&app_key=e389fde7aa464f0d22ccd6500e9cbcde`);
-      setProducts(response.data);
+      if (response.data.hints.lenght > 0) {
+        setProducts(response.data);
+      }
       setLoading(false)
     } catch (error) {
       console.error('error:', error);
